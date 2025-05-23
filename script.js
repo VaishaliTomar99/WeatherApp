@@ -1,4 +1,4 @@
-const apiKey = "62402ac1cf8343201ccecfd1341e2e1d"; 
+const apiKey = "62402ac1cf8343201ccecfd1341e2e1d";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
 const searchBox = document.querySelector(".search-city input");
@@ -6,50 +6,56 @@ const searchBtn = document.querySelector(".search-city button");
 const weatherIcon = document.querySelector(".weather-icon");
 
 async function checkWeather(city) {
-    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+    try {
+        const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
+        
+        if (!response.ok) {
+            throw new Error("City not found");
+        }
 
-    if (response.status === 404) {
-        alert("City not found!");
-        return;
-    }
+        const data = await response.json();
 
-    const data = await response.json();
+        // Update text content
+        document.querySelector(".city").textContent = data.name;
+        document.querySelector(".temp").textContent = Math.round(data.main.temp) + "°c";
+        document.querySelector(".humidity").textContent = data.main.humidity + "%";
+        document.querySelector(".wind").textContent = data.wind.speed + " km/h";
 
-    // Update UI with weather data
-    document.querySelector(".city").innerHTML = data.name;
-    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
-    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-    document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+        // Set weather icon based on condition
+        const condition = data.weather[0].main;
+        let iconSrc = "";
 
-    // Update weather icon based on condition
-    const condition = data.weather[0].main;
+        switch (condition) {
+            case "Clouds":
+                iconSrc = "images/clouds.png";
+                break;
+            case "Clear":
+                iconSrc = "images/clear.png";
+                break;
+            case "Rain":
+                iconSrc = "images/rain.png";
+                break;
+            case "Drizzle":
+                iconSrc = "images/drizzle.png";
+                break;
+            case "Mist":
+                iconSrc = "images/mist.png";
+                break;
+            case "Snow":
+                iconSrc = "images/snow.png";
+                break;
+            default:
+                iconSrc = "images/cloudy.jpg"; // fallback icon
+        }
 
-    switch (condition) {
-        case "Clouds":
-            weatherIcon.src = "D:\WeatherApp\clouds.png";
-            break;
-        case "Clear":
-            weatherIcon.src = "D:\WeatherApp\clear.png";
-            break;
-        case "Rain":
-            weatherIcon.src = "D:\WeatherApp\rain.avif";
-            break;
-        case "Drizzle":
-            weatherIcon.src = "D:\WeatherApp\drizzle.webp";
-            break;
-        case "Mist":
-            weatherIcon.src = "D:\WeatherApp\mist.png";
-            break;
-        case "Snow":
-            weatherIcon.src = "D:\WeatherApp\snow.png";
-            break;
-        default:
-            weatherIcon.src = "images/cloudy.jpg"; // fallback icon
-            break;
+        weatherIcon.src = iconSrc;
+
+    } catch (error) {
+        alert(error.message);
     }
 }
 
-// When user clicks search
+// Trigger weather search on button click
 searchBtn.addEventListener("click", () => {
     const city = searchBox.value.trim();
     if (city) {
