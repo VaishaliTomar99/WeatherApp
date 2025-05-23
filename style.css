@@ -1,0 +1,121 @@
+.box {
+    width: 100%;
+    max-width: 470px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #e0eafc;
+    background: linear-gradient(to right, #cfdef3, #e0eafc);
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.header div {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-city {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.search-city input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 30px;
+    flex: 1;
+    height: 50px;
+    padding: 0 20px;
+    background-color: #ffffff;
+    color: #000;
+}
+
+.search-city input::placeholder {
+    color: #777;
+}
+
+.search-city button {
+    border: none;
+    outline: none;
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-city button img {
+    width: 20px;
+}
+
+.weather-icon {
+    width: 120px;
+    margin-top: 10px;
+}
+
+.weather h1.temp {
+    font-size: 60px;
+    font-weight: 500;
+    margin: 10px 0 5px 0;
+}
+
+.weather h2.city {
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+    margin-top: 30px;
+}
+
+.col {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 10px;
+}
+
+.col img {
+    width: 40px;
+}
+
+.col p {
+    margin: 0;
+    line-height: 1.2;
+}
